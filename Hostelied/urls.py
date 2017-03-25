@@ -20,4 +20,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('UserAdministrator.urls')),
+    url(r'^postad/', include('PostYourAd.urls')),
 ]
