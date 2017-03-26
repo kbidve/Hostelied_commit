@@ -18,7 +18,13 @@ class CotBasisDetails(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     
-    def get(self, request, format='json'):
-        data = CotBasisRooms.objects.all()
-        serializer = CotBasisRoomsSerializer(data, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request, ad_id=None, format='json'):
+        if(ad_id==None):
+            data = CotBasisRooms.objects.all()
+            serializer = CotBasisRoomsSerializer(data, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            data = CotBasisRooms.objects.get(pk=ad_id)
+            serializer = CotBasisRoomsSerializer(data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
