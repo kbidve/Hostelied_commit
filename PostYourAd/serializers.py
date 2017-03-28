@@ -7,4 +7,4 @@ from .models import CotBasisRooms
 class CotBasisRoomsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CotBasisRooms
-        fields = ('id', 'room_rent', 'address')
+        fields = ('id', 'room_rent', 'address', 'user_id')
