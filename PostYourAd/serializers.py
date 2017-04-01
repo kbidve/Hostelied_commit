@@ -7,10 +7,10 @@ from .models import CotBasisRooms, FlatOnRent
 class CotBasisRoomsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CotBasisRooms
-        fields = ('id', 'room_rent', 'address', 'user_id')
+        fields = ('id', 'room_rent', 'address', 'user_id' , 'room_image')
         
 class FlatOnRentSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlatOnRent
-        fields = ('id', 'flat_type' , 'furnishing_type', 'user_id')
+        fields = ('id', 'flat_type' , 'furnishing_type', 'user_id' , 'flat_image')
         
