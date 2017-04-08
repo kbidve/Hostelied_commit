@@ -22,9 +22,6 @@ class CotBasisRooms(models.Model):
     def __str__(self):
         return self.address
     
-
-     
-
 class FlatOnRent(models.Model):
     flat_type = models.CharField(max_length=100)
     furnishing_type = models.CharField(max_length=100)
