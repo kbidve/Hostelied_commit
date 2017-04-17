@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from _elementtree import parse
 from UserAdministrator.models import UserInfo
 
@@ -15,6 +15,7 @@ class CotBasisRooms(models.Model):
     room_image = models.FileField(null = True , blank =True)
     user_id = models.ForeignKey(UserInfo , related_name='rooms' , default=1, on_delete= models.CASCADE)
     deposite = models.IntegerField(null = True)
+    location = models.PointField(null=True , blank = True)
     room_type = models.CharField(max_length = 100, blank=True)
     gender = models.CharField(max_length= 20 , blank= True)
     description = models.CharField(max_length = 500 , blank= True)
