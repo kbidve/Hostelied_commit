@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'leaflet',
     'rest_framework',
     'UserAdministrator',
     'PostYourAd'
@@ -140,3 +141,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, "media")
+
+# LEAFLET_CONFIG= {
+#     'DEFAULT_CENTER' : (18.5204 , 73.8567),
+#     
+#      }
