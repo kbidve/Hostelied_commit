@@ -28,6 +28,20 @@ class FlatOnRent(models.Model):
     furnishing_type = models.CharField(max_length=100)
     flat_image = models.FileField(null = True , blank =True)
     user_id = models.ForeignKey(UserInfo , related_name='flats' , default=1, on_delete= models.CASCADE)
+    flat_rent = models.IntegerField(default=0)
+    deposit = models.IntegerField(default=0 , null = True)
+    address = models.CharField(max_length=200 , default = 'some string')
+    no_of_persons_allowed = models.IntegerField(default=1)
+    description = models.CharField(max_length=500 , default = 'some string')
+    maintainance_charge = models.IntegerField(default=0 , null = True)
+    no_of_bathrooms = models.IntegerField(default=1)
+    no_of_balconies = models.IntegerField(default=0)
+    floor_no = models.IntegerField(default=1)
+    total_floor = models.IntegerField(default=1)
+    lift = models.BooleanField(default=False)
+    location = models.PointField(null=True , blank = True)
     
     def __str__(self):
         return self.flat_type +  " - " + self.furnishing_type
+    
+    
