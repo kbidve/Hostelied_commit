@@ -21,8 +21,10 @@ class CotBasisRoomsSerializer(serializers.ModelSerializer):
 #                   'deposite' , 'room_type' , 'gender' , 'description', )
         
 class FlatOnRentSerializer(serializers.ModelSerializer):
+    furnitures = serializers.StringRelatedField(many=True)
     class Meta:
         model = FlatOnRent
         fields = '__all__'
+        extra_field = ('furnitures',)
         #fields = ('id', 'flat_type' , 'furnishing_type', 'user_id' , 'flat_image')
         
