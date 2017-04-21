@@ -23,10 +23,15 @@ class CotBasisRooms(models.Model):
     def __str__(self):
         return self.address
     
+class Flat_Furnishing_Details(models.Model):
+    furniture = models.CharField(max_length = 20, blank=True)
+    def __str__(self):
+        return self.furniture
+    
 class FlatOnRent(models.Model):
     flat_type = models.CharField(max_length=100)
     furnishing_type = models.CharField(max_length=100)
-    #flat_image = models.FileField(null = True , blank =True)
+    furnishing_details = models.ManyToManyField(Flat_Furnishing_Details)
     user_id = models.ForeignKey(UserInfo , related_name='flats' , default=1, on_delete= models.CASCADE)
     flat_rent = models.IntegerField(default=0)
     deposit = models.IntegerField(default=0 , null = True)
@@ -48,5 +53,3 @@ class FlatOnRent(models.Model):
 class Flat_Images_Details(models.Model):
     flat_image = models.FileField(null = True , blank =True)
     flat_image_details = models.ForeignKey(FlatOnRent , on_delete=models.CASCADE , related_name='flat_images' , default=1)
-    #def __str__(self):
-    #    return self.flat_image

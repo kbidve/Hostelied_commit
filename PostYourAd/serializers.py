@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import CotBasisRooms, FlatOnRent, Room_Amanities , Flat_Images_Details
+from .models import CotBasisRooms, FlatOnRent, Room_Amanities , Flat_Images_Details, Flat_Furnishing_Details
 
 class Room_AmanitiesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,8 +14,13 @@ class Flat_Images_DetailsSerializer(serializers.ModelSerializer):
         fields = ('flat_image' ,)
         
         
+class Flat_Furnishing_Details(serializers.ModelSerializer):
+    class Meta:
+        model = Flat_Furnishing_Details
+        fields = ('furniture',)
+        
 class CotBasisRoomsSerializer(serializers.ModelSerializer):
-    amenities= Room_AmanitiesSerializer(read_only=True, many=True)
+    amenities= Room_AmanitiesSerializer(many=True)
     distance = serializers.DecimalField(source = 'distance.mi' , max_digits= 10 , decimal_places= 2, required = False ,
                                         read_only = True)
     class Meta:
@@ -23,14 +28,14 @@ class CotBasisRoomsSerializer(serializers.ModelSerializer):
         fields= '__all__'
         extra_field = ('amenities',)
         read_only_fields = ('location',)
-#         fields = ('id', 'room_rent', 'address', 'user_id' , 'room_image' , 'amenities' , 'room_rent_type',
-#                   'deposite' , 'room_type' , 'gender' , 'description', )
+
         
 class FlatOnRentSerializer(serializers.ModelSerializer):
     flat_images = Flat_Images_DetailsSerializer(many=True)
+    furnishing_details = Flat_Furnishing_Details(many=True)
     class Meta:
         model = FlatOnRent
         fields = '__all__'
-        extra_field = ('flat_images',)
-        #fields = ('id', 'flat_type' , 'furnishing_type', 'user_id' , 'flat_image')
+        extra_field = ('flat_images','furnishing_details')
+
         
