@@ -1,12 +1,18 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import CotBasisRooms, FlatOnRent, Room_Amanities
+from .models import CotBasisRooms, FlatOnRent, Room_Amanities , Flat_Images_Details
 
 class Room_AmanitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room_Amanities
         fields = ('amenity' ,)
+        
+class Flat_Images_DetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Flat_Images_Details
+        fields = ('flat_image' ,)
+        
         
 class CotBasisRoomsSerializer(serializers.ModelSerializer):
     amenities= Room_AmanitiesSerializer(read_only=True, many=True)
@@ -21,7 +27,7 @@ class CotBasisRoomsSerializer(serializers.ModelSerializer):
 #                   'deposite' , 'room_type' , 'gender' , 'description', )
         
 class FlatOnRentSerializer(serializers.ModelSerializer):
-    flat_images = serializers.StringRelatedField(many=True)
+    flat_images = Flat_Images_DetailsSerializer(many=True)
     class Meta:
         model = FlatOnRent
         fields = '__all__'
