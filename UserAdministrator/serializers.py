@@ -7,9 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
             required=True,
             validators=[UniqueValidator(queryset=UserInfo.objects.all())]
             )
-    password = serializers.CharField(min_length=8)
-    rooms = serializers.StringRelatedField(many=True)
+    
 
     class Meta:
         model = UserInfo
-        fields = ('id', 'name', 'contact_no', 'email_id' , 'password' , 'rooms')
+        fields = ('id', 'name', 'contact_no', 'email_id')

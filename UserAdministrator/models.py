@@ -5,3 +5,6 @@ class UserInfo(models.Model):
     contact_no = models.CharField(max_length=10, default="some string")
     email_id = models.EmailField()
     password = models.CharField(max_length=100 , default="some string")
+    
+    def __str__(self):
+        return self.name
