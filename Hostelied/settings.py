@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'leaflet',
     'rest_framework',
     'UserAdministrator',
-    'PostYourAd'
+    'PostYourAd',
+    'PostYourFoodAd'
 ]
 
 MIDDLEWARE_CLASSES = [
