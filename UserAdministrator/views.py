@@ -6,6 +6,8 @@ from PostYourAd.models import CotBasisRooms, FlatOnRent
 from PostYourAd.serializers import CotBasisRoomsSerializer, FlatOnRentSerializer
 from rest_framework.response import Response
 from rest_framework.status import  HTTP_201_CREATED
+from PostYourFoodAd.models import Mess_Info
+from PostYourFoodAd.serializers import Mess_InfoSerializer
 
 
 class UserList(generics.ListCreateAPIView):
@@ -66,20 +68,10 @@ class UsersRoomAdWithId(APIView):
             'rooms' : serializer.data 
             })
 
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import status
-# from .serializers import UserSerializer
-# from django.contrib.auth.models import User
-# 
-# class UserCreate(APIView):
-#     """ 
-#     Creates the user. 
-#     """
-# 
-#     def post(self, request, format='json'):
-#         serializer = UserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = serializer.save()
-#             if user:
-#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+class UsersFoodAdsList(APIView):
+    def get(self, request , user_id ,format='json'):
+        queryset= Mess_Info.objects.filter(user_id=user_id)
+        serializer= Mess_InfoSerializer(queryset , many=True)
+        return Response({
+            'mess' : serializer.data ,
+            })

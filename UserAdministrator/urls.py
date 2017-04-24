@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
 from PostYourAd.views import CotBasisDetais , FlatOnRentDetais
+from PostYourFoodAd.views import MessDetails
 
 urlpatterns = [
     url(r'^$', views.UserList.as_view(), name='UserAdministrator-create'),
@@ -10,4 +11,6 @@ urlpatterns = [
     url(r'^(?P<user_id>[0-9]+)/postedads/flats$', views.UsersFlatAdsList.as_view(), name='UserAdministrator-postedflatsads'),
     url(r'^(?P<user_id>[0-9]+)/postedads/rooms/(?P<pk>[0-9]+)$', CotBasisDetais.as_view(), name='UserAdministrator-postedroomad'),
     url(r'^(?P<user_id>[0-9]+)/postedads/flats/(?P<pk>[0-9]+)$', FlatOnRentDetais.as_view(), name='UserAdministrator-postedflatad'),
+    url(r'^(?P<user_id>[0-9]+)/postedfoodads/$', views.UsersFoodAdsList.as_view(), name='UserAdministrator-postedfoodads'),
+    url(r'^(?P<user_id>[0-9]+)/postedfoodads/(?P<pk>[0-9]+)$', MessDetails.as_view(), name='UserAdministrator-postedfoodmessad'),
 ]
