@@ -25,9 +25,7 @@ class MessList(generics.ListCreateAPIView):
         longitude = self.request.query_params.get('lng' , None)
          
         if latitude and longitude :
-            pnt = Mess_Info('POINT(' + str(latitude) + ' ' + str(longitude) +  ')' , srid = 4326)
-            print "Latitude = " + latitude
-            print "Longitude = " + longitude
+            pnt = GEOSGeometry('POINT(' + str(latitude) + ' ' + str(longitude) +  ')' , srid = 4326)
             qs = qs.annotate(distance = Distance('location', pnt)).order_by('distance')
         return qs
 

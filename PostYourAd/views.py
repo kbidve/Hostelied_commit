@@ -30,8 +30,6 @@ class CotBasisList(generics.ListCreateAPIView):
          
         if latitude and longitude :
             pnt = GEOSGeometry('POINT(' + str(latitude) + ' ' + str(longitude) +  ')' , srid = 4326)
-            print "Latitude = " + latitude
-            print "Longitude = " + longitude
             qs = qs.annotate(distance = Distance('location', pnt)).order_by('distance')
         return qs
 

@@ -24,7 +24,7 @@ class CotBasisRoomsSerializer(serializers.ModelSerializer):
     amenities= Room_AmanitiesSerializer(many=True, read_only=True)
     distance = serializers.DecimalField(source = 'distance.mi' , max_digits= 10 , decimal_places= 2, required = False ,
                                         read_only = True)
-    user = UserSerializer(source = 'user_id')
+    user = UserSerializer(source = 'user_id', read_only = True)
     class Meta:
         model = CotBasisRooms
         fields= '__all__'
@@ -35,13 +35,13 @@ class CotBasisRoomsSerializer(serializers.ModelSerializer):
 class FlatOnRentSerializer(serializers.ModelSerializer):
     flat_images = Flat_Images_DetailsSerializer(many=True, read_only=True)
     furnishing_details = Flat_Furnishing_Details(many=True, read_only=True)
-    user = UserSerializer(source = 'user_id')
+    user = UserSerializer(source = 'user_id', read_only = True)
     distance = serializers.DecimalField(source = 'distance.mi' , max_digits= 10 , decimal_places= 2, required = False ,
                                         read_only = True)
     class Meta:
         model = FlatOnRent
         fields = '__all__'
         extra_field = ('flat_images','furnishing_details', 'user')
-        read_only_fields = ('location',)
+        read_only_fields = ('location', 'user')
 
         
