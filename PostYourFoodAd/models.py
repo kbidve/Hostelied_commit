@@ -5,8 +5,13 @@ from django.contrib.gis.db import models
 from UserAdministrator.models import UserInfo
 
 class Mess_Info(models.Model):
+    MESS_TYPE=(
+        ('V','VEG'),
+        ('N','NONVEG'),
+        ('VN','VEG_NONVEG'),
+        )
     mess_name = models.CharField(max_length=100, default = 'some string')
-    mess_type  =models.CharField(max_length=100)
+    mess_type  =models.CharField(max_length=100 , choices=MESS_TYPE)
     veg_thali_prize_per_thali = models.IntegerField(default=0)
     veg_thali_prize_per_month_one_time = models.IntegerField(default=0)
     veg_thali_prize_per_month_both_time = models.IntegerField(default=0)

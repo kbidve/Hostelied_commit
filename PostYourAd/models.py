@@ -9,15 +9,30 @@ class Room_Amanities(models.Model):
         return self.amenity
     
 class CotBasisRooms(models.Model):
-    room_rent_type = models.CharField(max_length = 100 , blank = True)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+         )
+    ROOM_RENT_TYPE_CHOICES = (
+        ('Y', 'Yearly'),
+        ('S', 'SemisterWise'),
+        ('M', 'Monthly'),
+        )
+    ROOM_TYPE_CHOICES = (
+        ('ONE' , 'Single Room'),
+        ('TWO','Sharing With Another Student'),
+        ('THREE','Sharing With Other Two'),
+        ('FOUR', 'Sharing With Other Three'),
+        )
+    room_rent_type = models.CharField(max_length = 100 , blank = True, choices= ROOM_RENT_TYPE_CHOICES)
     room_rent = models.IntegerField()
     address = models.CharField(max_length=200)
     room_image = models.FileField(null = True , blank =True)
     user_id = models.ForeignKey(UserInfo , related_name='rooms' , default=1, on_delete= models.CASCADE)
     deposite = models.IntegerField(null = True)
     location = models.PointField(null=True , blank = True)
-    room_type = models.CharField(max_length = 100, blank=True)
-    gender = models.CharField(max_length= 20 , blank= True)
+    room_type = models.CharField(max_length = 100, blank=True, choices= ROOM_TYPE_CHOICES)
+    gender = models.CharField(max_length= 20 , blank= True, choices= GENDER_CHOICES)
     description = models.CharField(max_length = 500 , blank= True)
     amenities = models.ManyToManyField(Room_Amanities, blank= True)
     def __str__(self):
@@ -29,8 +44,20 @@ class Flat_Furnishing_Details(models.Model):
         return self.furniture
     
 class FlatOnRent(models.Model):
-    flat_type = models.CharField(max_length=100)
-    furnishing_type = models.CharField(max_length=100)
+    FLAT_TYPE = (
+        ('HallKitchen', 'HK'),
+        ('RoomKitchen', 'RK'),
+        ('1BHK', '1BHK'),
+        ('2BHK', '2BHK'),
+        ('3BHK', '3BHK'),
+        )
+    FURNISHING_TYPE = (
+        ('U', 'UNFURNISHED'),
+        ('S','SEMI_FURNISHED'),
+        ('F','FULLY_FURNISHED'),
+        )
+    flat_type = models.CharField(max_length=100, choices = FLAT_TYPE)
+    furnishing_type = models.CharField(max_length=100, choices = FURNISHING_TYPE)
     furnishing_details = models.ManyToManyField(Flat_Furnishing_Details, blank= True)
     user_id = models.ForeignKey(UserInfo , related_name='flats' , default=1, on_delete= models.CASCADE)
     flat_rent = models.IntegerField(default=0)
