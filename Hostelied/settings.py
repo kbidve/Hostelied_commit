@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'UserAdministrator',
     'PostYourAd',
-    'PostYourFoodAd'
+    'PostYourFoodAd',
+    'corsheaders',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -55,8 +56,12 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+ 
 ROOT_URLCONF = 'Hostelied.urls'
 
 TEMPLATES = [
@@ -77,7 +82,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Hostelied.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+}
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
